@@ -9,7 +9,8 @@
 
     win.enterFullscreen();
 
-    //win.showDevTools();
+    win.showDevTools();
+
     var gamePadController = new GamePadController();
 
     gamePadController.startPolling();
