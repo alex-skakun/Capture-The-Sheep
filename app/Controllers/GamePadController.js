@@ -69,18 +69,19 @@
          */
         this.pollStatus = function() {
             gamepads = navigator.getGamepads();
+            var gamepadsData = [];
             Array.prototype.forEach.call(gamepads, function (gamepad) {
-                var pressedButtons = [];
-                for (var i = 0, l = gamepad.buttons.length; i < l; i++) {
-                    var button = gamepad.buttons[i];
-                    if (button.pressed) {
-                        pressedButtons.push(KEY_MAP[i]);
+                gamepadsData.push({
+                    a: gamepad.buttons[0].pressed,
+                    x: gamepad.buttons[2].pressed,
+                    l: {
+                        x: gamepad.axes[0],
+                        y: gamepad.axes[1]
+
                     }
-                }
-
-
-                console.log(pressedButtons.join(' + '));
+                });
             });
+            sceneController.updateScene(gamepadsData);
         };
     }
 

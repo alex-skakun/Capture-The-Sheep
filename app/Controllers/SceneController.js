@@ -10,7 +10,7 @@
     }
 
     SceneController.prototype.updateScene = function updateScene (gamepadData) {
-
+        
     };
 
     global.SceneController = SceneController;
