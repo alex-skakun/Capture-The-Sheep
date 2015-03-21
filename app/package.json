@@ -1,0 +1,13 @@
+{
+  "name": "Capture The Sheep",
+  "description": "Game for hackaton",
+  "version": "0.1",
+  "main": "index.html",
+  "window": {
+    "toolbar": false,
+    "frame": false,
+    "position": "center",
+    "width": 600,
+    "height": 300
+  }
+}
