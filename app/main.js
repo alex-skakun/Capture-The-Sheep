@@ -5,11 +5,13 @@
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
-    //win.enterFullscreen();
+    win.enterFullscreen();
 
-    win.showDevTools();
+    //win.showDevTools();
 
     var gamePadController = new GamePadController();
     gamePadController.startPolling();
+
+
 
 }());

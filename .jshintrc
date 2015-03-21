@@ -19,6 +19,11 @@
     "smarttabs": true,
     "white": true,
     "globals": {
-        "GamePadController": true
+        "GamePadController": true,
+        "Player": true,
+        "Sheep": true,
+        "Farm": true,
+        "SceneController": true,
+        "SceneView": true
     }
 }
