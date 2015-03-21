@@ -28,7 +28,7 @@
                         return player.isCollisionWith(anotherPlayer) ||
                             player.isOutOfTheWorld();
                     });
-            })
+            }.bind(this))
             .forEach(function (playerCollided, i) {
                 playerCollided.updatePosition({
                     x: -gamepadData[i].l.x,
@@ -38,10 +38,11 @@
     };
 
     SceneController.prototype._attack = function (gamepadData) {
+        var _this = this;
         _(gamepadData)
             .filter('a')
             .map(function (gamepadDataPlayer, i) {
-                return this.scene.players[i];
+                return _this.scene.players[i];
             })
             .filter('inAttack', false)
             .filter('wasted', false)
@@ -50,8 +51,13 @@
                 setTimeout(function () {
                     player.inAttack = false;
                     if (!player.wasted) {
-                        // find other players around player
-                        //
+                        _(_this.scene.players)
+                            .without(player)
+                            .filter(function (otherPlayer) {
+                                return otherPlayer.isInAttackAreaWith(player);
+                            })
+                            .filter('wasted', false)
+                            .invoke('waste');
                     }
                 }, 500);
             });
