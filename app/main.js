@@ -2,16 +2,23 @@
 
     'use strict';
 
-    global.sceneController = new SceneController();
+    global.scene = new Scene(2);
+    global.view = new SceneView(scene);
+    global.sceneController = new SceneController(scene, view);
 
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
-    win.enterFullscreen();
 
-    win.showDevTools();
 
     var gamePadController = new GamePadController();
 
     gamePadController.startPolling();
+
+    setTimeout(function () {
+        document.body.removeChild(document.getElementById('startScreen'));
+        win.enterFullscreen();
+
+        //win.showDevTools();
+    }, 1000);
 }(window));

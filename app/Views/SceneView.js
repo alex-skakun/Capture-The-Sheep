@@ -2,8 +2,8 @@
 
     'use strict';
 
-    function createDOM () {
-
+    function createDOM (scene) {
+        scene.farms.forEach(function () {});
     }
 
     function getDisplayParams () {

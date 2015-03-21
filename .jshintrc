@@ -26,6 +26,7 @@
         "Sheep": true,
         "Farm": true,
         "SceneController": true,
-        "SceneView": true
+        "SceneView": true,
+        "Scene": true
     }
 }

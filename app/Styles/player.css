@@ -1,0 +1,28 @@
+.player {
+    position: absolute;
+    z-index: 1;
+    height: 20vh;
+    width: 20vh;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.1s linear;
+}
+
+.player.team-red {
+    background-color: red;
+}
+
+.player.on-sheep {
+    height: 25vh;
+}
+
+.player.team-blue {
+    background-color: blue;
+}
+
+.player.wasted {
+    background-color: orange;
+}
+
+.player.in-attack {
+    background-color: green;
+}
