@@ -50,7 +50,20 @@
     }
 
     SceneView.prototype.reRender = function reRender (scene) {
+        var _this = this;
+        scene.players.forEach(function (player) {
 
+            if (player.position) {
+                var x = player.position.x * 100 / _this.displayParams.width,
+                    y = player.position.y * 100 / _this.displayParams.height;
+
+                player.element.style.top = y + '%';
+                player.element.style.left = x + '%';
+            }
+            player.element.classList.remove('to-left');
+            player.element.classList.remove('to-right');
+            player.element.classList.remove('to-' + (player.direction ? 'left' : 'right'));
+        });
     };
 
     global.SceneView = SceneView;
