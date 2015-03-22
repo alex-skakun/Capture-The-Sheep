@@ -1,75 +1,46 @@
 .player {
     position: absolute;
     z-index: 1;
-    height: 20vh;
-    width: 20vh;
-    margin: -10vh;
+    height: 30%;
+    width: 30%;
     background-size: contain;
+    margin: 0;
 }
-
 .player > figcaption {
     color: #fff;
     text-shadow: 0 0 5px #000;
-    height: 5vh;
-    line-height: 5vh;
     text-align: center;
-    margin-top: -5vh;
     font-size: 14pt;
+    position: absolute;
+    top: -170px;
+    left: -80px;
+    z-index: 10000;
 }
-
 .player > div {
+    position: relative;
     width: 100%;
     height: 100%;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
-
-.player.to-left div {
+.player:not(.on-sheep) > div {
+    /* TODO: fix */
+    top: -98%;
+    left: -50%;
+}
+.player.left div {
     transform: rotateY(-180deg);
 }
-
-.player.team-red > div {
+.player.red:not(.on-sheep) > div {
     background-image: url("../images/player1.png");
 }
-
-.player.team-blue > div {
+.player.blue:not(.on-sheep) > div {
     background-image: url("../images/player2.png");
 }
-
-.player.on-sheep {
-    height: 30vh;
-    width: 30vh;
-}
-
-.player.sheep-red.team-red > div {
-    background-image: url("../images/player1-sheep1.png");
-}
-
-.player.sheep-blue.team-red > div {
-    background-image: url("../images/player1-sheep2.png");
-}
-
-.player.sheep-red.team-blue > div {
-    background-image: url("../images/player2-sheep1.png");
-}
-
-.player.sheep-blue.team-blue > div {
-    background-image: url("../images/player2-sheep2.png");
-}
-
-.player.wasted {
-    background-color: orange;
-}
-
-.player.in-attack {
-    background-color: green;
-}
-
-.player.red-steps > div {
+.player.red.moving:not(.on-sheep):not(.wasted):not(.attacks) > div {
     -webkit-animation: red-steps .5s infinite;
 }
-
 @-webkit-keyframes red-steps {
     0% {
         background-image: url("../images/cel1/hod1.png");
@@ -80,13 +51,10 @@
     100% {
         background-image: url("../images/cel1/hod1.png");
     }
-
 }
-
-.player.blue-steps > div {
+.player.blue.moving:not(.on-sheep):not(.wasted):not(.attacks) > div {
     -webkit-animation: blue-steps .5s infinite;
 }
-
 @-webkit-keyframes blue-steps {
     0% {
         background-image: url("../images/cel2/hodi1.png");
@@ -97,21 +65,16 @@
     100% {
         background-image: url("../images/cel2/hodi1.png");
     }
-
 }
-
-.player.red-wasted > div {
+.player.red.wasted > div {
     background-image: url("../images/upal.png");
 }
-
-.player.blue-wasted > div {
+.player.blue.wasted > div {
     background-image: url("../images/upalch.png");
 }
-
-.player.red-attacks > div {
+.player.red.attacks:not(.on-sheep) > div {
     -webkit-animation: red-attacks .5s infinite;
 }
-
 @-webkit-keyframes red-attacks {
     0% {
         background-image: url("../images/cel1/hod1.png");
@@ -126,11 +89,9 @@
         background-image: url("../images/cel1/hod1.png");
     }
 }
-
-.player.blue-attacks > div {
+.player.blue.attacks:not(.on-sheep) > div {
     -webkit-animation: blue-attacks .5s infinite;
 }
-
 @-webkit-keyframes blue-attacks {
     0% {
         background-image: url("../images/cel2/hodi1.png");
@@ -144,4 +105,46 @@
     100% {
         background-image: url("../images/cel2/hodi1.png");
     }
+}
+.player.on-sheep {
+    height: 40%;
+    width: 40%;
+}
+.player.on-sheep > div {
+    /* TODO: fix */
+    top: -95%;
+    left: -46%;
+}
+.player.on-sheep.left > div {
+    transform: rotateY(0deg) !important;
+}
+.player.on-sheep.right > div {
+    transform: rotateY(180deg) !important;
+}
+.player.on-sheep.attacks > div {
+    transition: background-image 0 linear .2s;
+}
+.player.red.sheep-red > div {
+    background-image: url("../images/1/NA-OBB3322.png");
+}
+.player.red.sheep-red.attacks > div {
+    background-image: url("../images/1/NA-OBB3311.png");
+}
+.player.red.sheep-blue > div {
+    background-image: url("../images/4/NA-OBB55.png");
+}
+.player.red.sheep-blue.attacks > div {
+    background-image: url("../images/4/NA-OBB551.png");
+}
+.player.blue.sheep-red > div {
+    background-image: url("../images/2/NA-OBB221.png");
+}
+.player.blue.sheep-red.attacks > div {
+    background-image: url("../images/2/NA-OBB22111.png");
+}
+.player.blue.sheep-blue > div {
+    background-image: url("../images/3/NA-OBB1111.png");
+}
+.player.blue.sheep-blue.attacks > div {
+    background-image: url("../images/3/NA-OBB1122.png");
 }

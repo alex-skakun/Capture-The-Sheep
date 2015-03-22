@@ -16,33 +16,11 @@
         sceneFragment.appendChild(gameField);
 
         scene.players.forEach(function (player, index) {
-            player.element.classList.add('team-' + (player.team ? 'blue' : 'red'));
             player.element.querySelector('figcaption').textContent = 'Player ' + (index + 1);
-            if (player.position) {
-                var x = player.position.x * 100 / displayParams.width,
-                    y = player.position.y * 100 / displayParams.height;
-
-                player.element.classList.remove('to-left');
-                player.element.classList.remove('to-right');
-                player.element.classList.add('to-' + (player.direction ? 'left' : 'right'));
-                player.element.style.top = y + '%';
-                player.element.style.left = x + '%';
-            }
             gameField.appendChild(player.element);
         });
 
         scene.sheep.forEach(function (sheep) {
-            sheep.element.classList.add('team-' + (sheep.team ? 'blue' : 'red'));
-            if (sheep.position) {
-                var x = sheep.position.x * 100 / displayParams.width,
-                    y = sheep.position.y * 100 / displayParams.height;
-
-                sheep.element.classList.remove('to-left');
-                sheep.element.classList.remove('to-right');
-                sheep.element.classList.add('to-' + (sheep.direction ? 'left' : 'right'));
-                sheep.element.style.top = y + '%';
-                sheep.element.style.left = x + '%';
-            }
             gameField.appendChild(sheep.element);
         });
 
@@ -58,56 +36,79 @@
     }
 
     function SceneView(scene) {
-
         this.displayParams = getDisplayParams(scene);
         this.dom = createDOM(scene, this.displayParams);
-
     }
 
     SceneView.prototype.reRender = function reRender(scene) {
         var _this = this;
-        scene.players.forEach(function (player) {
+        _(scene.players)
+            .forEach(function (player) {
+                var style = player.element.style;
+                var classList = player.element.classList;
+                if (player.position) {
+                    var x = player.position.x * 100 / _this.displayParams.width;
+                    var y = player.position.y * 100 / _this.displayParams.height;
 
-            if (player.position) {
-                var x = player.position.x * 100 / _this.displayParams.width,
-                    y = player.position.y * 100 / _this.displayParams.height;
+                    style.top = y + '%';
+                    style.left = x + '%';
+                    style.zIndex = Math.floor(y);
+                }
+                var classes = {
+                    'blue': player.team,
+                    'red': !player.team,
+                    'attacks': player.inAttack,
+                    'wasted': player.wasted,
+                    'right': !player.direction,
+                    'left': player.direction,
+                    'on-sheep': player.sheep,
+                    'sheep-red': player.sheep && !player.sheep.team,
+                    'sheep-blue': player.sheep && player.sheep.team,
+                    'moving': player.isMoving
+                };
+                _(classes)
+                    .forEach(function (isUsed, className) {
+                        if (isUsed && !classList.contains(className)) {
+                            classList.add(className);
+                        } else if (!isUsed && classList.contains(className)) {
+                            classList.remove(className);
+                        }
+                    })
+                    .value();
+            })
+            .value();
+        _(scene.sheep)
+            .forEach(function (sheep) {
+                var classList = sheep.element.classList;
+                var style = sheep.element.style;
+                if (sheep.position) {
+                    var x = sheep.position.x * 100 / _this.displayParams.width;
+                    var y = sheep.position.y * 100 / _this.displayParams.height;
 
-                player.element.style.top = y + '%';
-                player.element.style.left = x + '%';
-            }
-            player.element.classList.remove('to-left');
-            player.element.classList.remove('to-right');
-            player.element.classList.add('to-' + (player.direction ? 'left' : 'right'));
-            player.element.classList.remove('sheep-red');
-            player.element.classList.remove('sheep-blue');
-            if (player.sheep) {
-                player.element.classList.add('on-sheep');
-                player.element.classList.add('sheep-' + (player.sheep.team ? 'blue' : 'red'));
-            } else {
-                player.element.classList.remove('on-sheep');
-            }
-        });
-
-        scene.sheep.forEach(function (sheep) {
-            if (sheep.position) {
-                var x = sheep.position.x * 100 / _this.displayParams.width,
-                    y = sheep.position.y * 100 / _this.displayParams.height;
-
-
-                sheep.element.style.top = y + '%';
-                sheep.element.style.left = x + '%';
-            }
-            sheep.element.classList.remove('to-left');
-            sheep.element.classList.remove('to-right');
-            sheep.element.classList.add('to-' + (sheep.direction ? 'left' : 'right'));
-            if (sheep.busy) {
-                sheep.element.classList.add('busy');
-            } else {
-                sheep.element.classList.remove('busy');
-            }
-        });
+                    style.top = y + '%';
+                    style.left = x + '%';
+                    style.zIndex = Math.floor(y);
+                }
+                var classes = {
+                    'blue': sheep.team,
+                    'red': !sheep.team,
+                    'right': !sheep.direction,
+                    'left': sheep.direction,
+                    'busy': sheep.busy,
+                    'leaving': sheep.isLeaving
+                };
+                _(classes)
+                    .forEach(function (isUsed, className) {
+                        if (isUsed && !classList.contains(className)) {
+                            classList.add(className);
+                        } else if (!isUsed && classList.contains(className)) {
+                            classList.remove(className);
+                        }
+                    })
+                    .value();
+            })
+            .value();
     };
 
     global.SceneView = SceneView;
-
 }(window));

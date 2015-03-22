@@ -3,8 +3,10 @@
     'use strict';
 
     function createSheepElement () {
-        var sheepContainer = document.createElement('div');
+        var sheepContainer = document.createElement('figure');
+        var image = document.createElement('div');
         sheepContainer.classList.add('sheep');
+        sheepContainer.appendChild(image);
         return sheepContainer;
     }
 

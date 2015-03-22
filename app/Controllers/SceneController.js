@@ -99,7 +99,7 @@
                         .filter('wasted', false)
                         .invoke('waste', player.direction)
                         .value();
-                }, 500);
+                }, 300);
             })
             .value();
     };
