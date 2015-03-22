@@ -29,7 +29,7 @@
     Player.prototype.updatePosition = function (delta) {
         this.position.x += delta.x;
         this.position.y += delta.y;
-        this.direction = +(delta.x > 0);
+        this.direction = delta.x === 0 ? this.direction : +(delta.x > 0);
     };
     Player.prototype.sit = function (sheep) {
         this.sheep = sheep;
