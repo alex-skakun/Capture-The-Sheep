@@ -45,6 +45,7 @@
         if (direction === undefined) {
             direction = this.direction;
         }
+        this.sheep.direction = direction;
         this.sheep.position = {
             x: this.position.x,
             y: this.position.y
