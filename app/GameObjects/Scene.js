@@ -2,12 +2,25 @@
 
     'use strict';
 
+    var DEFAULT_POSITIONS = {
+        players: {
+            '00': {
+                x: 154,
+                y: 454
+            },
+            '11': {
+                x: 1766,
+                y: 136
+            }
+        }
+    };
+
     function Scene (numberOfPlayers) {
 
         this.players = [];
         for (var i = 0; i < numberOfPlayers; i++) {
             this.players.push(new Player({
-                position: null,
+                position: DEFAULT_POSITIONS.players[(i % 2).toString() + i],
                 team: i % 2,
                 direction: i % 2
             }));

@@ -4,8 +4,8 @@
 
     var doc = document;
 
-    function createDOM (scene) {
-        var sceneContainer =doc.getElementById('mainSceneContainer'),
+    function createDOM (scene, displayParams) {
+        var sceneContainer = doc.getElementById('mainSceneContainer'),
             sceneFragment = doc.createDocumentFragment(),
             scoreContainer = doc.createElement('div'),
             gameField = doc.createElement('div');
@@ -15,23 +15,37 @@
         sceneFragment.appendChild(scoreContainer);
         sceneFragment.appendChild(gameField);
 
-        scene.farms.forEach(function () {});
+        scene.players.forEach(function (player, index) {
+            player.element.classList.add('team-' + (player.team ? 'blue' : 'red'));
+            player.element.querySelector('figcaption').textContent = 'Player ' + (index + 1);
+            if (player.position) {
+                var x = player.position.x * 100 / displayParams.width,
+                    y = player.position.y * 100 / displayParams.height;
+
+                player.element.classList.remove('to-left');
+                player.element.classList.remove('to-right');
+                player.element.classList.remove('to-' + (player.direction ? 'left' : 'right'));
+                player.element.style.top = y + '%';
+                player.element.style.left = x + '%';
+            }
+            gameField.appendChild(player.element);
+        });
 
         sceneContainer.appendChild(sceneFragment);
     }
 
     function getDisplayParams () {
         return {
-            width: 0,
-            height: 0,
+            width: global.screen.width,
+            height: global.screen.height * 0.7,
             step: 0.1
         };
     }
 
     function SceneView (scene) {
 
-        this.displayParams = getDisplayParams();
-        this.dom = createDOM(scene);
+        this.displayParams = getDisplayParams(scene);
+        this.dom = createDOM(scene, this.displayParams);
 
     }
 
