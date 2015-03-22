@@ -1,4 +1,4 @@
-(function () {
+(function (global) {
     'use strict';
 
     function distanceSq(a, b) {
@@ -22,6 +22,7 @@
     global.utils = {
         distance: distance,
         distanceSq: distanceSq,
-        isCollide: isCollide
+        isCollide: isCollide,
+        isInCircle: isInCircle
     };
 }(window));

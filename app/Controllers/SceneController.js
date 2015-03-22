@@ -10,6 +10,9 @@
     }
 
     SceneController.prototype.updateScene = function updateScene(gamepadData) {
+        if (gamepadData.length < 2){
+            return;
+        }
         this._updatePositions(gamepadData);
         this._sitting(gamepadData);
         this._attack(gamepadData);
@@ -36,7 +39,8 @@
                     x: -gamepadData[i].l.x,
                     y: -gamepadData[i].l.y
                 });
-            });
+            })
+            .value();
     };
 
     SceneController.prototype._attack = function (gamepadData) {
@@ -63,7 +67,8 @@
                         .filter('wasted', false)
                         .invoke('waste', player.direction);
                 }, 500);
-            });
+            })
+            .value();
     };
 
     SceneController.prototype._sitting = function (gamepadData) {
@@ -76,7 +81,8 @@
             .filter('wasted', false);
         actionAllowed
             .filter('sheep')
-            .invoke('standUp');
+            .invoke('standUp')
+            .value();
         actionAllowed
             .filter('sheep', null)
             .forEach(function (player) {
@@ -89,7 +95,8 @@
                 if (sheepNear){
                     player.sit(sheepNear);
                 }
-            }.bind(this));
+            }.bind(this))
+            .value();
     };
 
     SceneController.prototype._winning = function () {
@@ -104,7 +111,9 @@
                         player.sheep.leave();
                         player.standUp();
                     }.bind(this))
+                    .value()
             }.bind(this))
+            .value()
     };
 
     global.SceneController = SceneController;
