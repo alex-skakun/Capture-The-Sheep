@@ -134,21 +134,79 @@
 .player.red.sheep-red.attacks > div {
     background-image: url("../images/1/NA-OBB3311.png");
 }
+.player.red.sheep-red.moving > div {
+    -webkit-animation: red-red-moving .4s infinite;
+}
+@-webkit-keyframes red-red-moving {
+    0% {
+        background-image: url("../images/5/a1.png");
+    }
+    50% {
+        background-image: url("../images/5/a2.png");
+    }
+    100% {
+        background-image: url("../images/5/a1.png");
+    }
+}
 .player.red.sheep-blue > div {
     background-image: url("../images/4/NA-OBB55.png");
 }
 .player.red.sheep-blue.attacks > div {
     background-image: url("../images/4/NA-OBB551.png");
 }
+.player.red.sheep-blue.moving > div {
+    -webkit-animation: red-blue-moving .4s infinite;
+}
+@-webkit-keyframes red-blue-moving {
+    0% {
+        background-image: url("../images/5/c1.png");
+    }
+    50% {
+        background-image: url("../images/5/c2.png");
+    }
+    100% {
+        background-image: url("../images/5/c1.png");
+    }
+}
+
 .player.blue.sheep-red > div {
     background-image: url("../images/2/NA-OBB221.png");
 }
 .player.blue.sheep-red.attacks > div {
     background-image: url("../images/2/NA-OBB22111.png");
 }
+.player.blue.sheep-red.moving > div {
+    -webkit-animation: blue-red-moving .4s infinite;
+}
+@-webkit-keyframes blue-red-moving {
+    0% {
+        background-image: url("../images/5/g1.png");
+    }
+    50% {
+        background-image: url("../images/5/g2.png");
+    }
+    100% {
+        background-image: url("../images/5/g1.png");
+    }
+}
+
 .player.blue.sheep-blue > div {
     background-image: url("../images/3/NA-OBB1111.png");
 }
 .player.blue.sheep-blue.attacks > div {
     background-image: url("../images/3/NA-OBB1122.png");
+}
+.player.blue.sheep-blue.moving > div {
+    -webkit-animation: blue-blue-moving .4s infinite;
+}
+@-webkit-keyframes blue-blue-moving {
+    0% {
+        background-image: url("../images/5/b1.png");
+    }
+    50% {
+        background-image: url("../images/5/b2.png");
+    }
+    100% {
+        background-image: url("../images/5/b1.png");
+    }
 }
