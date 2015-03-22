@@ -15,8 +15,8 @@
         sceneFragment.appendChild(scoreContainer);
         sceneFragment.appendChild(gameField);
 
-        scene.players.forEach(function (player, index) {
-            player.element.querySelector('figcaption').textContent = 'Player ' + (index + 1);
+        scene.players.forEach(function (player, i) {
+            player.element.querySelector('figcaption').textContent = i % 2 ? 'Вилларибо' : 'Вилабаджо';
             gameField.appendChild(player.element);
         });
 
