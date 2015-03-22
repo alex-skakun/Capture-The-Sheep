@@ -27,6 +27,10 @@
                     return;
                 }
                 var delta = gamepadData[i].l;
+                if (player.sheep) {
+                    delta.x *= 0.7;
+                    delta.y *= 0.7;
+                }
                 var newPosition = utils.addVectors(delta, player.position);
                 if (utils.isOutTheWorld(newPosition)) {
                     if (newPosition.x < 0 && delta.x < 0) {

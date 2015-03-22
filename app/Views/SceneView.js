@@ -4,7 +4,7 @@
 
     var doc = document;
 
-    function createDOM (scene, displayParams) {
+    function createDOM(scene, displayParams) {
         var sceneContainer = doc.getElementById('mainSceneContainer'),
             sceneFragment = doc.createDocumentFragment(),
             scoreContainer = doc.createElement('div'),
@@ -49,7 +49,7 @@
         sceneContainer.appendChild(sceneFragment);
     }
 
-    function getDisplayParams () {
+    function getDisplayParams() {
         return {
             width: 1920,
             height: 1080 * 0.7,
@@ -57,14 +57,14 @@
         };
     }
 
-    function SceneView (scene) {
+    function SceneView(scene) {
 
         this.displayParams = getDisplayParams(scene);
         this.dom = createDOM(scene, this.displayParams);
 
     }
 
-    SceneView.prototype.reRender = function reRender (scene) {
+    SceneView.prototype.reRender = function reRender(scene) {
         var _this = this;
         scene.players.forEach(function (player) {
 

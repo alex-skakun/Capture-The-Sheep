@@ -25,14 +25,13 @@
     background-position: center;
 }
 
-.player.to-left  div {
+.player.to-left div {
     transform: rotateY(-180deg);
 }
 
-.player.team-red > div{
+.player.team-red > div {
     background-image: url("../images/player1.png");
 }
-
 
 .player.team-blue > div {
     background-image: url("../images/player2.png");
@@ -46,12 +45,15 @@
 .player.sheep-red.team-red > div {
     background-image: url("../images/player1-sheep1.png");
 }
+
 .player.sheep-blue.team-red > div {
     background-image: url("../images/player1-sheep2.png");
 }
+
 .player.sheep-red.team-blue > div {
     background-image: url("../images/player2-sheep1.png");
 }
+
 .player.sheep-blue.team-blue > div {
     background-image: url("../images/player2-sheep2.png");
 }
@@ -62,4 +64,84 @@
 
 .player.in-attack {
     background-color: green;
+}
+
+.player.red-steps > div {
+    -webkit-animation: red-steps .5s infinite;
+}
+
+@-webkit-keyframes red-steps {
+    0% {
+        background-image: url("../images/cel1/hod1.png");
+    }
+    50% {
+        background-image: url("../images/cel1/hod2.png");
+    }
+    100% {
+        background-image: url("../images/cel1/hod1.png");
+    }
+
+}
+
+.player.blue-steps > div {
+    -webkit-animation: blue-steps .5s infinite;
+}
+
+@-webkit-keyframes blue-steps {
+    0% {
+        background-image: url("../images/cel2/hodi1.png");
+    }
+    50% {
+        background-image: url("../images/cel2/hodi2.png");
+    }
+    100% {
+        background-image: url("../images/cel2/hodi1.png");
+    }
+
+}
+
+.player.red-wasted > div {
+    background-image: url("../images/upal.png");
+}
+
+.player.blue-wasted > div {
+    background-image: url("../images/upalch.png");
+}
+
+.player.red-attacks > div {
+    -webkit-animation: red-attacks .5s infinite;
+}
+
+@-webkit-keyframes red-attacks {
+    0% {
+        background-image: url("../images/cel1/hod1.png");
+    }
+    33% {
+        background-image: url("../images/cel1/udar1.png");
+    }
+    66% {
+        background-image: url("../images/cel1/udar2.png");
+    }
+    100% {
+        background-image: url("../images/cel1/hod1.png");
+    }
+}
+
+.player.blue-attacks > div {
+    -webkit-animation: blue-attacks .5s infinite;
+}
+
+@-webkit-keyframes blue-attacks {
+    0% {
+        background-image: url("../images/cel2/hodi1.png");
+    }
+    33% {
+        background-image: url("../images/cel2/ydari1.png");
+    }
+    66% {
+        background-image: url("../images/cel2/ydari2.png");
+    }
+    100% {
+        background-image: url("../images/cel2/hodi1.png");
+    }
 }
