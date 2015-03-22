@@ -84,28 +84,28 @@
     };
 
     SceneController.prototype._sitting = function (gamepadData) {
-        var actionAllowed = _(gamepadData)
+        _(gamepadData)
             .filter('x')
-            .map(function (gamepadDataPlayer, i) {
+            .map(function (gamepadDataPlayer) {
+                var i = gamepadData.indexOf(gamepadDataPlayer);
                 return this.scene.players[i];
             }.bind(this))
             .filter('inAttack', false)
-            .filter('wasted', false);
-        actionAllowed
-            .filter('sheep')
-            .invoke('standUp')
-            .value();
-        actionAllowed
-            .filter('sheep', null)
-            .forEach(function (player) {
-                var sheepNear = _(this.scene.sheep)
-                    .filter('busy', false)
-                    .filter('isLeaving', false)
-                    .find(function(sheep) {
-                        return player.isInSittingAreaWith(sheep);
-                    });
-                if (sheepNear){
-                    player.sit(sheepNear);
+            .filter('wasted', false)
+            .filter('inSittingProccess', false)
+            .forEach(function(player){
+                if (player.sheep){
+                    player.standUp();
+                } else {
+                    var sheepNear = _(this.scene.sheep)
+                        .filter('busy', false)
+                        .filter('isLeaving', false)
+                        .find(function(sheep) {
+                            return player.isInSittingAreaWith(sheep);
+                        });
+                    if (sheepNear){
+                        player.sit(sheepNear);
+                    }
                 }
             }.bind(this))
             .value();

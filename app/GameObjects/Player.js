@@ -4,7 +4,7 @@
     var ATTACK_RADIUS = PLAYER_RADIUS * 1.5;
 
     var doc = document;
-    var SITTING_RADIUS = PLAYER_RADIUS * 1.5;
+    var SITTING_RADIUS = PLAYER_RADIUS * 2;
 
     function createPlayerElement() {
         var playerContainer = doc.createElement('figure'),
@@ -23,6 +23,7 @@
         this.wasted = false;
         this.direction = playerDto.direction;
         this.sheep = null;
+        this.inSittingProccess = false;
         this.element = createPlayerElement();
     }
 
@@ -34,7 +35,14 @@
     Player.prototype.sit = function (sheep) {
         this.sheep = sheep;
         sheep.busy = true;
-        sheep.position = this.position;
+        sheep.position = {
+            x: -50000,
+            y: -50000
+        };
+        this.inSittingProccess = true;
+        setTimeout(function () {
+            this.inSittingProccess = false;
+        }.bind(this), 500);
     };
 
     Player.prototype.isCollisionWith = function (player) {
@@ -44,6 +52,10 @@
         if (!this.sheep){
             return;
         }
+        this.inSittingProccess = true;
+        setTimeout(function () {
+            this.inSittingProccess = false;
+        }.bind(this), 500);
         this.sheep.busy = false;
         if (direction === undefined) {
             direction = this.direction;
