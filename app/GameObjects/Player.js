@@ -41,6 +41,9 @@
         return global.utils.isCollide(this.position, player.position, PLAYER_RADIUS);
     };
     Player.prototype.standUp = function (direction) {
+        if (!this.sheep){
+            return;
+        }
         this.sheep.busy = false;
         if (direction === undefined) {
             direction = this.direction;
@@ -70,6 +73,9 @@
         this.standUp(direction);
         this.wasted = true;
         this.inAttack = false;
+        setTimeout(function(){
+            this.wasted = false;
+        }.bind(this), 2000);
     };
     Player.prototype.isInSittingAreaWith = function (sheep) {
         return utils.isCollide(sheep.position, this.position, SITTING_RADIUS);
