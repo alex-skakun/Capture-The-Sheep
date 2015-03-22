@@ -81,7 +81,10 @@
             player.element.classList.remove('sheep-red');
             player.element.classList.remove('sheep-blue');
             if (player.sheep) {
+                player.element.classList.add('on-sheep');
                 player.element.classList.add('sheep-' + (player.sheep.team ? 'blue' : 'red'));
+            } else {
+                player.element.classList.remove('on-sheep');
             }
         });
 
