@@ -27,13 +27,19 @@
         this.farms = [
             new Farm({
                 team: 0,
-                radius: 30,
-                position: null
+                radius: 1000,
+                position: {
+                    x: 2,
+                    y: 1724
+                }
             }),
             new Farm({
                 team: 0,
-                radius: 30,
-                position: null
+                radius: 1000,
+                position: {
+                    x: 1864,
+                    y: -404
+                }
             })
         ];
 

@@ -1,0 +1,16 @@
+#mainSceneContainer {
+    background: url("../images/scene-background.png") no-repeat;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+#scoreContainer {
+    width: 100%;
+    height: 30vh;
+}
+
+#gameField {
+    width: 100%;
+    height: 70vh;
+}

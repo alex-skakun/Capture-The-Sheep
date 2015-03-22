@@ -19,6 +19,6 @@
         document.body.removeChild(document.getElementById('startScreen'));
         win.enterFullscreen();
 
-        //win.showDevTools();
+        win.showDevTools();
     }, 1000);
 }(window));

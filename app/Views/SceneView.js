@@ -2,8 +2,22 @@
 
     'use strict';
 
+    var doc = document;
+
     function createDOM (scene) {
+        var sceneContainer =doc.getElementById('mainSceneContainer'),
+            sceneFragment = doc.createDocumentFragment(),
+            scoreContainer = doc.createElement('div'),
+            gameField = doc.createElement('div');
+        scoreContainer.id = 'scoreContainer';
+        gameField.id = 'gameField';
+
+        sceneFragment.appendChild(scoreContainer);
+        sceneFragment.appendChild(gameField);
+
         scene.farms.forEach(function () {});
+
+        sceneContainer.appendChild(sceneFragment);
     }
 
     function getDisplayParams () {
