@@ -22,6 +22,7 @@
     height: 100%;
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
 }
 
 .player.to-left  div {
@@ -42,16 +43,16 @@
     width: 30vh;
 }
 
-.player.sheep-red.team-red {
+.player.sheep-red.team-red > div {
     background-image: url("../images/player1-sheep1.png");
 }
-.player.sheep-blue.team-red {
+.player.sheep-blue.team-red > div {
     background-image: url("../images/player1-sheep2.png");
 }
-.player.sheep-red.team-blue {
+.player.sheep-red.team-blue > div {
     background-image: url("../images/player2-sheep1.png");
 }
-.player.sheep-blue.team-blue {
+.player.sheep-blue.team-blue > div {
     background-image: url("../images/player2-sheep2.png");
 }
 
