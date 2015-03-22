@@ -22,9 +22,11 @@
 
     SceneController.prototype._updatePositions = function (gamepadData) {
         _(this.scene.players)
-            .forEach(function (player, i) {
+            .filter('wasted', false)
+            .forEach(function (player) {
+                var i = this.scene.players.indexOf(player);
                 player.updatePosition(gamepadData[i].l);
-            })
+            }.bind(this))
             .filter(function (player) {
                 return player.isOutOfTheWorld() ||
                     _(this.scene.players)
@@ -55,7 +57,8 @@
         var _this = this;
         _(gamepadData)
             .filter('a')
-            .map(function (gamepadDataPlayer, i) {
+            .map(function (gamepadDataPlayer) {
+                var i = gamepadData.indexOf(gamepadDataPlayer);
                 return _this.scene.players[i];
             })
             .filter('inAttack', false)
@@ -73,7 +76,8 @@
                             return otherPlayer.isInAttackAreaWith(player);
                         })
                         .filter('wasted', false)
-                        .invoke('waste', player.direction);
+                        .invoke('waste', player.direction)
+                        .value();
                 }, 500);
             })
             .value();
