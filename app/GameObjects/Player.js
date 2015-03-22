@@ -1,10 +1,10 @@
 (function (global) {
     'use strict';
-    var PLAYER_RADIUS = 40;
+    var PLAYER_RADIUS = 35;
     var ATTACK_RADIUS = PLAYER_RADIUS * 1.5;
 
     var doc = document;
-    var SITTING_RADIUS = PLAYER_RADIUS * 2;
+    var SITTING_RADIUS = PLAYER_RADIUS * 1.6;
 
     function createPlayerElement() {
         var playerContainer = doc.createElement('figure'),
@@ -34,6 +34,10 @@
         this.isMoving = delta.x !== 0 || delta.y !== 0;
     };
     Player.prototype.sit = function (sheep) {
+        this.position = {
+            x: sheep.position.x,
+            y: sheep.position.y
+        };
         this.sheep = sheep;
         sheep.busy = true;
         sheep.position = {
