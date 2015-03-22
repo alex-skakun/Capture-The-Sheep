@@ -1,6 +1,6 @@
 (function (global) {
     'use strict';
-    var PLAYER_RADIUS = 70;
+    var PLAYER_RADIUS = 40;
     var ATTACK_RADIUS = PLAYER_RADIUS * 1.5;
 
     var doc = document;
@@ -29,7 +29,7 @@
     Player.prototype.updatePosition = function (delta) {
         this.position.x += delta.x;
         this.position.y += delta.y;
-        this.direction = delta.x === 0 ? this.direction : +(delta.x > 0);
+        this.direction = delta.x === 0 ? this.direction : +(delta.x < 0);
     };
     Player.prototype.sit = function (sheep) {
         this.sheep = sheep;

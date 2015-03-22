@@ -24,7 +24,7 @@
 
                 player.element.classList.remove('to-left');
                 player.element.classList.remove('to-right');
-                player.element.classList.remove('to-' + (player.direction ? 'left' : 'right'));
+                player.element.classList.add('to-' + (player.direction ? 'left' : 'right'));
                 player.element.style.top = y + '%';
                 player.element.style.left = x + '%';
             }
@@ -62,7 +62,7 @@
             }
             player.element.classList.remove('to-left');
             player.element.classList.remove('to-right');
-            player.element.classList.remove('to-' + (player.direction ? 'left' : 'right'));
+            player.element.classList.add('to-' + (player.direction ? 'left' : 'right'));
         });
     };
 
