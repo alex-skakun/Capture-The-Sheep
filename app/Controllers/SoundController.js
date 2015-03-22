@@ -16,11 +16,11 @@
     }
 
     var win = function () {
-        return playSoundFile('sounds/bell.ogg');
+        setTimeout(playSoundFile('sounds/bell.ogg'), 10000);
     };
 
     function bleating() {
-        return playSoundFile('sounds/bleating.ogg');
+        setTimeout(playSoundFile('sounds/bleating.ogg'), 15000);
     }
 
     function running() {
@@ -28,22 +28,22 @@
     }
 
     function hit() {
-        return playSoundFile('sounds/hit.ogg');
+        setTimeout(playSoundFile('sounds/hit.ogg'), 10000);
     }
 
     function swing() {
-        return playSoundFile('sounds/swing.ogg');
+        setTimeout(playSoundFile('sounds/swing.ogg'), 10000);
     }
 
     function kick() {
-        return playSoundFile('sounds/kick.ogg');
+        setTimeout(playSoundFile('sounds/kick.ogg'));
     }
 
     function birds() {
-        return playSoundFile('sounds/birds.ogg', true);
+        setInterval(playSoundFile.bind(null, 'sounds/birds.ogg'), 300000);
     }
 
-    setTimeout(birds, 10000);
+    setTimeout(birds, 15000);
 
     global.sounds = {
         win: win,

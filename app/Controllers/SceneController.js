@@ -31,6 +31,10 @@
                     delta.x *= 0.7;
                     delta.y *= 0.7;
                 }
+                if (player.inAttack){
+                    delta.x *= 0.5;
+                    delta.y *= 0.5;
+                }
                 var newPosition = utils.addVectors(delta, player.position);
                 if (utils.isOutTheWorld(newPosition)) {
                     if (newPosition.x < 0 && delta.x < 0) {
