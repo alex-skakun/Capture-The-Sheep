@@ -10,8 +10,8 @@
     }
 
     SceneController.prototype.updateScene = function updateScene(gamepadData) {
-        if (gamepadData.length < 2) {
-            return;
+        if (gamepadData.length < 4) {
+            return
         }
         this._updatePositions(gamepadData);
         this._sitting(gamepadData);

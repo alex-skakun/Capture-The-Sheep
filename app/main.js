@@ -2,7 +2,7 @@
 
     'use strict';
 
-    global.scene = new Scene(2);
+    global.scene = new Scene(4);
     global.view = new SceneView(scene);
     global.sceneController = new SceneController(scene, view);
 

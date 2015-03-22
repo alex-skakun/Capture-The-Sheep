@@ -11,6 +11,14 @@
             '11': {
                 x: 1766,
                 y: 136
+            },
+            '02': {
+                x: 400,
+                y: 720
+            },
+            '13': {
+                x: 1600,
+                y: 0
             }
         }
     };
@@ -46,7 +54,7 @@
         this.farms = [
             new Farm({
                 team: 0,
-                radius: 1350,
+                radius: 1200,
                 position: {
                     x: 2,
                     y: 1724
@@ -54,7 +62,7 @@
             }),
             new Farm({
                 team: 1,
-                radius: 600,
+                radius: 800,
                 position: {
                     x: 1864,
                     y: -404
