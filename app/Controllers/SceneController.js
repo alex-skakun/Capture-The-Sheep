@@ -53,6 +53,8 @@
                     .filter('wasted', false)
                     .concat(this.scene.sheep)
                     .forEach(function (anotherPlayer) {
+                        player.element.style.zIndex = Math.floor(player.position.y);
+                        anotherPlayer.element.style.zIndex = Math.floor(anotherPlayer.position.y);
                         var oldDistance = utils.distanceSq(anotherPlayer.position, player.position);
                         var newDistance = utils.distanceSq(anotherPlayer.position, newPosition);
                         if (oldDistance > 6400){
