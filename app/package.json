@@ -9,5 +9,6 @@
         "position": "center",
         "width": 500,
         "height": 300
+        /*"always-on-top": true*/
     }
 }

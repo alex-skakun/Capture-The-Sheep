@@ -59,7 +59,10 @@
                         x: Math.abs(gamepad.axes[0]) < 0.15 ? 0 : gamepad.axes[0] * 7,
                         y: Math.abs(gamepad.axes[1]) < 0.15 ? 0 : gamepad.axes[1] * 7
 
-                    }
+                    },
+                    pause: gamepad.buttons[9].pressed,
+                    up: gamepad.buttons[12].pressed,
+                    down: gamepad.buttons[13].pressed
                 });
             });
             sceneController.updateScene(gamepadsData);

@@ -9,7 +9,7 @@
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
-
+    global.win = win;
 
     var gamePadController = new GamePadController();
 
@@ -20,6 +20,10 @@
         win.enterFullscreen();
         document.body.requestPointerLock();
 
-        win.showDevTools();
+        win.on('focus', function () {
+            document.body.requestPointerLock();
+        });
+
+        //win.showDevTools();
     }, 1000);
 }(window));

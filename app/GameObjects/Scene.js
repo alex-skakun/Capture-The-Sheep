@@ -61,8 +61,9 @@
                 }
             })
         ];
-        this.scores = [0, 0]
-
+        this.scores = [0, 0];
+        this.paused = false;
+        this.activeButton = 1;
     }
 
     Scene.prototype.replaceSheep = function (oldSheep) {

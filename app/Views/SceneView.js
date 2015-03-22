@@ -4,13 +4,23 @@
 
     var doc = document;
 
-    function createDOM(scene, displayParams) {
+    var redScore,
+        blueScore;
+
+    var menuPauseContainer = doc.getElementById('menuPauseContainer');
+
+    function createDOM (scene, displayParams) {
         var sceneContainer = doc.getElementById('mainSceneContainer'),
             sceneFragment = doc.createDocumentFragment(),
             scoreContainer = doc.createElement('div'),
             gameField = doc.createElement('div');
         scoreContainer.id = 'scoreContainer';
         gameField.id = 'gameField';
+
+        scoreContainer.innerHTML = '<span id="scoreRed">0</span><span id="scoreBlue">0</span>';
+
+        redScore = scoreContainer.querySelector('#scoreRed');
+        blueScore = scoreContainer.querySelector('#scoreBlue');
 
         sceneFragment.appendChild(scoreContainer);
         sceneFragment.appendChild(gameField);
@@ -27,7 +37,7 @@
         sceneContainer.appendChild(sceneFragment);
     }
 
-    function getDisplayParams() {
+    function getDisplayParams () {
         return {
             width: 1920,
             height: 1080 * 0.7,
@@ -35,13 +45,17 @@
         };
     }
 
-    function SceneView(scene) {
+    function SceneView (scene) {
         this.displayParams = getDisplayParams(scene);
         this.dom = createDOM(scene, this.displayParams);
     }
 
-    SceneView.prototype.reRender = function reRender(scene) {
+    SceneView.prototype.reRender = function reRender (scene) {
         var _this = this;
+        if (redScore && blueScore) {
+            redScore.textContent = scene.scores[0];
+            blueScore.textContent = scene.scores[1];
+        }
         _(scene.players)
             .forEach(function (player) {
                 var style = player.element.style;
@@ -108,6 +122,7 @@
                     .value();
             })
             .value();
+
     };
 
     global.SceneView = SceneView;
