@@ -72,11 +72,6 @@
         this.sheep = null;
     };
 
-    Player.prototype.isOutOfTheWorld = function () {
-        return this.position.x < 0 || 1920 < this.position.x ||
-            this.position.y < 0 || 756 < this.position.y;
-    };
-
     Player.prototype.isInAttackAreaWith = function (player) {
         return global.utils.isCollide(this.position, player.position, ATTACK_RADIUS);
     };

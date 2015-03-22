@@ -46,15 +46,15 @@
         this.farms = [
             new Farm({
                 team: 0,
-                radius: 1000,
+                radius: 1350,
                 position: {
                     x: 2,
                     y: 1724
                 }
             }),
             new Farm({
-                team: 0,
-                radius: 1000,
+                team: 1,
+                radius: 600,
                 position: {
                     x: 1864,
                     y: -404
@@ -64,6 +64,17 @@
         this.scores = [0, 0]
 
     }
+
+    Scene.prototype.replaceSheep = function (oldSheep) {
+        oldSheep.position = !oldSheep.team ? {
+            x: 270,
+            y: 560
+        } : {
+            x: 1630,
+            y: 26
+        }
+
+    };
 
     global.Scene = Scene;
 

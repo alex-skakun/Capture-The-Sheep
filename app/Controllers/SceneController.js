@@ -10,7 +10,7 @@
     }
 
     SceneController.prototype.updateScene = function updateScene(gamepadData) {
-        if (gamepadData.length < 2){
+        if (gamepadData.length < 2) {
             return;
         }
         this._updatePositions(gamepadData);
@@ -22,35 +22,50 @@
 
     SceneController.prototype._updatePositions = function (gamepadData) {
         _(this.scene.players)
-            .filter('wasted', false)
-            .forEach(function (player) {
-                var i = this.scene.players.indexOf(player);
-                player.updatePosition(gamepadData[i].l);
-            }.bind(this))
-            .filter(function (player) {
-                return player.isOutOfTheWorld() ||
-                    _(this.scene.players)
-                    .without(player)
-                    .concat(this.scene.sheep)
-                    .any(function (anotherPlayer) {
-                        return player.isCollisionWith(anotherPlayer);
-                    });
-            }.bind(this))
-            .forEach(function (playerCollided) {
-                var i = this.scene.players.indexOf(playerCollided);
-                if (playerCollided.isOutOfTheWorld()){
-                    playerCollided.updatePosition({
-                        x: playerCollided.position.x < 0 ? -gamepadData[i].l.x : 1920 < playerCollided.position.x ? -gamepadData[i].l.x : 0,
-                        y: playerCollided.position.y < 0 ? -gamepadData[i].l.y : 756 < playerCollided.position.y ? -gamepadData[i].l.y : 0
-                    });
+            .forEach(function (player, i) {
+                if (player.wasted) {
                     return;
                 }
-                playerCollided.updatePosition({
-                    x: -gamepadData[i].l.x,
-                    y: -gamepadData[i].l.y
-                });
+                var delta = gamepadData[i].l;
+                var newPosition = utils.addVectors(delta, player.position);
+                if (utils.isOutTheWorld(newPosition)) {
+                    if (newPosition.x < 0 && delta.x < 0) {
+                        delta.x = 0
+                    }
+                    if (newPosition.x > 1920 && delta.x > 0) {
+                        delta.x = 0;
+                    }
+                    if (newPosition.y < 0 && delta.y < 0) {
+                        delta.y = 0;
+                    }
+                    if (newPosition.y > 756 && delta.y > 0) {
+                        delta.y = 0;
+                    }
+                }
+                newPosition = utils.addVectors(delta, player.position);
+
+                _(this.scene.players)
+                    .without(player)
+                    .filter('wasted', false)
+                    .concat(this.scene.sheep)
+                    .forEach(function (anotherPlayer) {
+                        var oldDistance = utils.distanceSq(anotherPlayer.position, player.position);
+                        var newDistance = utils.distanceSq(anotherPlayer.position, newPosition);
+                        if (oldDistance > 6400){
+                            return;
+                        }
+                        if (oldDistance > newDistance) {
+                            delta = {
+                                x: 0,
+                                y: 0
+                            }
+                        }
+                    })
+                    .value();
+                player.updatePosition(delta);
             }.bind(this))
             .value();
+
     };
 
     SceneController.prototype._attack = function (gamepadData) {
@@ -67,7 +82,7 @@
                 player.inAttack = true;
                 setTimeout(function () {
                     player.inAttack = false;
-                    if (player.wasted){
+                    if (player.wasted) {
                         return;
                     }
                     _(_this.scene.players)
@@ -93,17 +108,17 @@
             .filter('inAttack', false)
             .filter('wasted', false)
             .filter('inSittingProccess', false)
-            .forEach(function(player){
-                if (player.sheep){
+            .forEach(function (player) {
+                if (player.sheep) {
                     player.standUp();
                 } else {
                     var sheepNear = _(this.scene.sheep)
                         .filter('busy', false)
                         .filter('isLeaving', false)
-                        .find(function(sheep) {
+                        .find(function (sheep) {
                             return player.isInSittingAreaWith(sheep);
                         });
-                    if (sheepNear){
+                    if (sheepNear) {
                         player.sit(sheepNear);
                     }
                 }
@@ -116,12 +131,21 @@
             .forEach(function (farm) {
                 _(this.scene.players)
                     .filter(function (player) {
-                        return utils.isInCircle(player.position, farm);
+                        return player.sheep && player.sheep.team !== player.team;
+                    })
+                    .filter(function (player) {
+                        if (player.team === farm.team) {
+                            return utils.isInCircle(player.position, farm);
+                        } else {
+                            return false;
+                        }
                     })
                     .forEach(function (player) {
                         this.scene.scores[player.team]++;
-                        player.sheep.leave();
+                        var sheep = player.sheep;
                         player.standUp();
+                        //player.sheep.leave();
+                        this.scene.replaceSheep(sheep);
                     }.bind(this))
                     .value()
             }.bind(this))
