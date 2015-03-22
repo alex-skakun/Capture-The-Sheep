@@ -66,6 +66,10 @@
         background-image: url("../images/cel2/hodi1.png");
     }
 }
+.player.wasted {
+    width: 20%;
+    height: 20%;
+}
 .player.red.wasted > div {
     background-image: url("../images/upal.png");
 }
