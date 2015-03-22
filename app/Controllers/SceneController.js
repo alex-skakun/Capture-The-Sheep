@@ -34,12 +34,20 @@
                         return player.isCollisionWith(anotherPlayer);
                     });
             }.bind(this))
-            .forEach(function (playerCollided, i) {
+            .forEach(function (playerCollided) {
+                var i = this.scene.players.indexOf(playerCollided);
+                if (playerCollided.isOutOfTheWorld()){
+                    playerCollided.updatePosition({
+                        x: playerCollided.position.x < 0 ? -gamepadData[i].l.x : 1920 < playerCollided.position.x ? -gamepadData[i].l.x : 0,
+                        y: playerCollided.position.y < 0 ? -gamepadData[i].l.y : 756 < playerCollided.position.y ? -gamepadData[i].l.y : 0
+                    });
+                    return;
+                }
                 playerCollided.updatePosition({
                     x: -gamepadData[i].l.x,
                     y: -gamepadData[i].l.y
                 });
-            })
+            }.bind(this))
             .value();
     };
 

@@ -2,25 +2,6 @@
 
     'use strict';
 
-    var KEY_MAP = {
-        0: 'a',
-        1: 'b',
-        2: 'x',
-        3: 'y',
-        4: 'l1',
-        5: 'r1',
-        6: 'l2',
-        7: 'r2',
-        8: 'back',
-        9: 'start',
-        10: 'l3',
-        11: 'r3',
-        12: 'up',
-        13: 'down',
-        14: 'left',
-        15: 'right'
-    };
-
     var gamepads = navigator.getGamepads();
 
     function GamePadController () {
@@ -75,8 +56,8 @@
                     a: gamepad.buttons[0].pressed,
                     x: gamepad.buttons[2].pressed,
                     l: {
-                        x: Math.abs(gamepad.axes[0]) < 0.12 ? 0 : gamepad.axes[0] * 7,
-                        y: Math.abs(gamepad.axes[1]) < 0.12 ? 0 : gamepad.axes[1] * 7
+                        x: Math.abs(gamepad.axes[0]) < 0.15 ? 0 : gamepad.axes[0] * 7,
+                        y: Math.abs(gamepad.axes[1]) < 0.15 ? 0 : gamepad.axes[1] * 7
 
                     }
                 });
