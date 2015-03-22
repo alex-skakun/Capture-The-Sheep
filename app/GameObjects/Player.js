@@ -4,6 +4,7 @@
     var ATTACK_RADIUS = PLAYER_RADIUS * 1.5;
 
     var doc = document;
+    var SITTING_RADIUS = PLAYER_RADIUS * 1.5;
 
     function createPlayerElement() {
         var playerContainer = doc.createElement('figure'),
@@ -29,9 +30,29 @@
         this.position.x += delta.x;
         this.position.y += delta.y;
     };
+    Player.prototype.sit = function (sheep) {
+        this.sheep = sheep;
+        sheep.busy = true;
+        sheep.position = this.position;
+    };
 
     Player.prototype.isCollisionWith = function (player) {
         return global.utils.isCollide(this.position, player.position, PLAYER_RADIUS);
+    };
+    Player.prototype.standUp = function (direction) {
+        this.sheep.busy = false;
+        if (direction === undefined) {
+            direction = this.direction;
+        }
+        this.sheep.position = {
+            x: this.position.x,
+            y: this.position.y
+        };
+        this.position = {
+            x: this.position.x + (direction ? 1 : -1) * SITTING_RADIUS,
+            y: this.position.y
+        };
+        this.sheep = null;
     };
 
     Player.prototype.isOutOfTheWorld = function () {
@@ -47,6 +68,9 @@
         this.standUp(direction);
         this.wasted = true;
         this.inAttack = false;
+    };
+    Player.prototype.isInSittingAreaWith = function (sheep) {
+        return utils.isCollide(sheep.position, this.position, SITTING_RADIUS);
     };
 
     global.Player = Player;

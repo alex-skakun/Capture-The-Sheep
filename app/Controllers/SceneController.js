@@ -11,9 +11,10 @@
 
     SceneController.prototype.updateScene = function updateScene(gamepadData) {
         this._updatePositions(gamepadData);
-        this._attack(gamepadData);
         this._sitting(gamepadData);
+        this._attack(gamepadData);
         this._winning();
+        this.view.reRender(this.scene);
     };
 
     SceneController.prototype._updatePositions = function (gamepadData) {
@@ -66,11 +67,44 @@
     };
 
     SceneController.prototype._sitting = function (gamepadData) {
-
+        var actionAllowed = _(gamepadData)
+            .filter('x')
+            .map(function (gamepadDataPlayer, i) {
+                return this.scene.players[i];
+            }.bind(this))
+            .filter('inAttack', false)
+            .filter('wasted', false);
+        actionAllowed
+            .filter('sheep')
+            .invoke('standUp');
+        actionAllowed
+            .filter('sheep', null)
+            .forEach(function (player) {
+                var sheepNear = _(this.scene.sheep)
+                    .filter('busy', false)
+                    .filter('isLeaving', false)
+                    .find(function(sheep) {
+                        return player.isInSittingAreaWith(sheep);
+                    });
+                if (sheepNear){
+                    player.sit(sheepNear);
+                }
+            }.bind(this));
     };
 
     SceneController.prototype._winning = function () {
-
+        _(this.scene.farms)
+            .forEach(function (farm) {
+                _(this.scene.players)
+                    .filter(function (player) {
+                        return utils.isInCircle(player.position, farm);
+                    })
+                    .forEach(function (player) {
+                        this.scene.scores[player.team]++;
+                        player.sheep.leave();
+                        player.standUp();
+                    }.bind(this))
+            }.bind(this))
     };
 
     global.SceneController = SceneController;

@@ -12,7 +12,12 @@
         this.direction = playerDto.direction;
         this.busy = false;
         this.element = createPlayerElement();
+        this.isLeaving = false;
     }
+
+    Sheep.prototype.leave = function () {
+        this.isLeaving = true;
+    };
 
 
 
