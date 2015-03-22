@@ -38,7 +38,21 @@
 }
 
 .player.on-sheep {
-    height: 25vh;
+    height: 30vh;
+    width: 30vh;
+}
+
+.player.sheep-red.team-red {
+    background-image: url("../images/player1-sheep1.png");
+}
+.player.sheep-blue.team-red {
+    background-image: url("../images/player1-sheep2.png");
+}
+.player.sheep-red.team-blue {
+    background-image: url("../images/player2-sheep1.png");
+}
+.player.sheep-blue.team-blue {
+    background-image: url("../images/player2-sheep2.png");
 }
 
 .player.wasted {

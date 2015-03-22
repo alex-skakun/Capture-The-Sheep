@@ -4,7 +4,7 @@
 
     function createSheepElement () {
         var sheepContainer = document.createElement('div');
-        sheepContainer.classList.add('ship');
+        sheepContainer.classList.add('sheep');
         return sheepContainer;
     }
 

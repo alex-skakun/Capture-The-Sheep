@@ -28,16 +28,16 @@
         this.sheep = [
             new Sheep({
                 position: {
-                    x: 0,
-                    y: 0
+                    x: 270,
+                    y: 560
                 },
                 team: 0,
                 direction: 0
             }),
             new Sheep({
                 position: {
-                    x: 100,
-                    y: 0
+                    x: 1630,
+                    y: 26
                 },
                 team: 1,
                 direction: 1
