@@ -18,7 +18,8 @@
     setTimeout(function () {
         document.body.removeChild(document.getElementById('startScreen'));
         win.enterFullscreen();
+        document.body.requestPointerLock();
 
-        //win.showDevTools();
+        win.showDevTools();
     }, 1000);
 }(window));

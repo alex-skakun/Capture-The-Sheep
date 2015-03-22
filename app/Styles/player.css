@@ -3,28 +3,36 @@
     z-index: 1;
     height: 20vh;
     width: 20vh;
-    transform: rotateY(0deg);
     margin: -10vh;
+    background-size: contain;
 }
 
-.player.to-right {
-    transform: rotateY(0deg);
+.player > figcaption {
+    color: #fff;
+    text-shadow: 0 0 5px #000;
+    height: 5vh;
+    line-height: 5vh;
+    text-align: center;
+    margin-top: -5vh;
+    font-size: 14pt;
 }
 
-.player.to-left {
+.player > div {
+    width: 100%;
+    height: 100%;
+}
+
+.player.to-left  div {
     transform: rotateY(-180deg);
 }
-.player.to-left figcaption {
-    transform: rotateY(-180deg);
-}
 
-.player.team-red {
-    background-color: red;
+.player.team-red > div{
+    background: url("../images/player1.png") no-repeat;
 }
 
 
-.player.team-blue {
-    background-color: blue;
+.player.team-blue > div {
+    background: url("../images/player2.png") no-repeat;
 }
 
 .player.on-sheep {

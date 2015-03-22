@@ -2,8 +2,10 @@
 
     'use strict';
 
-    function createPlayerElement () {
-
+    function createSheepElement () {
+        var sheepContainer = document.createElement('div');
+        sheepContainer.classList.add('ship');
+        return sheepContainer;
     }
 
     function Sheep (playerDto) {
@@ -11,7 +13,7 @@
         this.team = playerDto.team;
         this.direction = playerDto.direction;
         this.busy = false;
-        this.element = createPlayerElement();
+        this.element = createSheepElement();
         this.isLeaving = false;
     }
 
