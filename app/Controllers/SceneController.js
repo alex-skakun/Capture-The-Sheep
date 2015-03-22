@@ -101,6 +101,7 @@
                         .invoke('waste', player.direction)
                         .forEach(function () {
                             sounds.hit();
+                            sounds.kick();
                         })
                         .value();
                 }, 300);

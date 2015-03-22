@@ -32,11 +32,16 @@
         return playSoundFile('sounds/swing.ogg');
     }
 
+    function kick() {
+        return playSoundFile('sounds/kick.ogg');
+    }
+
     global.sounds = {
         win: win,
         bleating: bleating,
         running: running,
         hit: hit,
-        swing: swing
+        swing: swing,
+        kick: kick
     };
 }(window));
