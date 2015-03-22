@@ -86,6 +86,7 @@
             .filter('wasted', false)
             .forEach(function (player) {
                 player.inAttack = true;
+                sounds.swing();
                 setTimeout(function () {
                     player.inAttack = false;
                     if (player.wasted) {
@@ -98,6 +99,9 @@
                         })
                         .filter('wasted', false)
                         .invoke('waste', player.direction)
+                        .forEach(function () {
+                            sounds.hit();
+                        })
                         .value();
                 }, 300);
             })
@@ -126,6 +130,7 @@
                         });
                     if (sheepNear) {
                         player.sit(sheepNear);
+                        sounds.bleating();
                     }
                 }
             }.bind(this))
@@ -147,6 +152,7 @@
                         }
                     })
                     .forEach(function (player) {
+                        sounds.win();
                         this.scene.scores[player.team]++;
                         var sheep = player.sheep;
                         player.standUp();

@@ -31,7 +31,13 @@
         this.position.x += delta.x;
         this.position.y += delta.y;
         this.direction = delta.x === 0 ? this.direction : +(delta.x < 0);
-        this.isMoving = delta.x !== 0 || delta.y !== 0;
+        var newIsMoving = delta.x !== 0 || delta.y !== 0;
+        if (newIsMoving && !this.isMoving) {
+            this._runningSoung = sounds.running();
+        } else if (!newIsMoving && this.isMoving) {
+            this._runningSoung();
+        }
+        this.isMoving = newIsMoving;
     };
     Player.prototype.sit = function (sheep) {
         this.position = {
@@ -54,7 +60,7 @@
         return global.utils.isCollide(this.position, player.position, PLAYER_RADIUS);
     };
     Player.prototype.standUp = function (direction) {
-        if (!this.sheep){
+        if (!this.sheep) {
             return;
         }
         this.inSittingProccess = true;
@@ -85,7 +91,7 @@
         this.standUp(direction);
         this.wasted = true;
         this.inAttack = false;
-        setTimeout(function(){
+        setTimeout(function () {
             this.wasted = false;
         }.bind(this), 2000);
     };
