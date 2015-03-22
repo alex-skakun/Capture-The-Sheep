@@ -11,8 +11,17 @@
         return Math.sqrt(distanceSq(a, b));
     }
 
+    function isCollide(a, b, r) {
+        return distanceSq(a, b) < 4 * r * r;
+    }
+
+    function isInCircle(point, circle) {
+        return distance(point, circle) < circle.radius;
+    }
+
     global.utils = {
         distance: distance,
-        distanceSq: distanceSq
+        distanceSq: distanceSq,
+        isCollide: isCollide
     };
 }(window));

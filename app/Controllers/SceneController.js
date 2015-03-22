@@ -22,11 +22,12 @@
                 player.updatePosition(gamepadData[i].l);
             })
             .filter(function (player) {
-                return _(this.scene.players)
+                return player.isOutOfTheWorld() ||
+                    _(this.scene.players)
                     .without(player)
+                    .concat(this.scene.sheep)
                     .any(function (anotherPlayer) {
-                        return player.isCollisionWith(anotherPlayer) ||
-                            player.isOutOfTheWorld();
+                        return player.isCollisionWith(anotherPlayer);
                     });
             }.bind(this))
             .forEach(function (playerCollided, i) {
@@ -50,15 +51,16 @@
                 player.inAttack = true;
                 setTimeout(function () {
                     player.inAttack = false;
-                    if (!player.wasted) {
-                        _(_this.scene.players)
-                            .without(player)
-                            .filter(function (otherPlayer) {
-                                return otherPlayer.isInAttackAreaWith(player);
-                            })
-                            .filter('wasted', false)
-                            .invoke('waste');
+                    if (player.wasted){
+                        return;
                     }
+                    _(_this.scene.players)
+                        .filter('team', (player.team + 1) % 2)
+                        .filter(function (otherPlayer) {
+                            return otherPlayer.isInAttackAreaWith(player);
+                        })
+                        .filter('wasted', false)
+                        .invoke('waste', player.direction);
                 }, 500);
             });
     };
