@@ -36,8 +36,8 @@
 
     function getDisplayParams () {
         return {
-            width: global.screen.width,
-            height: global.screen.height * 0.7,
+            width: 1920,
+            height: 1080 * 0.7,
             step: 0.1
         };
     }

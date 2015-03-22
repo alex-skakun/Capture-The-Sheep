@@ -75,8 +75,8 @@
                     a: gamepad.buttons[0].pressed,
                     x: gamepad.buttons[2].pressed,
                     l: {
-                        x: Math.abs(gamepad.axes[0]) < 0.12 ? 0 : gamepad.axes[0] * 3,
-                        y: Math.abs(gamepad.axes[1]) < 0.12 ? 0 : gamepad.axes[1] * 3
+                        x: Math.abs(gamepad.axes[0]) < 0.12 ? 0 : gamepad.axes[0] * 7,
+                        y: Math.abs(gamepad.axes[1]) < 0.12 ? 0 : gamepad.axes[1] * 7
 
                     }
                 });
